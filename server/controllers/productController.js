@@ -34,4 +34,26 @@ const addProduct = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts, getProductById, addProduct };
+const deleteProduct = async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+const updateProduct = async (req, res) => {
+  try {
+    const updated = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json({ message: 'Product updated successfully', updated });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+module.exports = { getAllProducts, getProductById, addProduct, deleteProduct, updateProduct };

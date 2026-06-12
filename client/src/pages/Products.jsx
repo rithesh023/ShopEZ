@@ -31,36 +31,55 @@ function Products() {
       alert('Added to cart successfully!')
     } catch (err) {
       console.log(err)
-      alert('Error adding to cart')
     }
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h2>All Products</h2>
-        <div>
-          <button onClick={() => navigate('/cart')} style={{ padding: '8px 20px', marginRight: '10px', backgroundColor: 'orange', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-            Cart
-          </button>
-          <button onClick={() => navigate('/profile')} style={{ padding: '8px 20px', backgroundColor: 'green', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-            Profile
-          </button>
-        </div>
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+    <div style={{ padding: '30px', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+      <h2 style={{ textAlign: 'center', fontSize: '32px', marginBottom: '30px', color: '#1a1a2e' }}>
+        Our Products
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px', maxWidth: '1100px', margin: '0 auto' }}>
         {products.map(product => (
-          <div key={product._id} style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '15px', textAlign: 'center' }}>
-            <img src={product.image} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '5px' }} />
-            <h3>{product.name}</h3>
-            <p style={{ color: '#666' }}>{product.description}</p>
-            <p style={{ fontSize: '20px', fontWeight: 'bold', color: 'green' }}>₹{product.price}</p>
-            <button
-              onClick={() => addToCart(product)}
-              style={{ width: '100%', padding: '10px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-            >
-              Add to Cart
-            </button>
+          <div key={product._id} style={{
+            backgroundColor: 'white',
+            borderRadius: '15px',
+            overflow: 'hidden',
+            boxShadow: '0 3px 15px rgba(0,0,0,0.1)',
+            transition: 'transform 0.2s'
+          }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-5px)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{ width: '100%', height: '220px', objectFit: 'cover' }}
+            />
+            <div style={{ padding: '20px' }}>
+              <h3 style={{ marginBottom: '8px', color: '#1a1a2e' }}>{product.name}</h3>
+              <p style={{ color: '#666', fontSize: '13px', marginBottom: '12px' }}>{product.description}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                <span style={{ fontSize: '22px', fontWeight: 'bold', color: '#e94560' }}>₹{product.price}</span>
+                <span style={{ fontSize: '12px', color: '#888', backgroundColor: '#f0f0f0', padding: '4px 10px', borderRadius: '20px' }}>
+                  {product.category}
+                </span>
+              </div>
+              <button
+                onClick={() => addToCart(product)}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  backgroundColor: '#1a1a2e',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '15px'
+                }}>
+                🛒 Add to Cart
+              </button>
+            </div>
           </div>
         ))}
       </div>
