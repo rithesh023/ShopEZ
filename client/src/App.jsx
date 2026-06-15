@@ -7,6 +7,7 @@ import Products from './pages/Products'
 import Cart from './pages/Cart'
 import Profile from './pages/Profile'
 import AdminDashboard from './pages/AdminDashboard'
+import Checkout from './pages/Checkout'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   )
