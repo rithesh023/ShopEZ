@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 function Navbar() {
   const navigate = useNavigate()
   const username = localStorage.getItem('username')
+  const isAdmin = localStorage.getItem('isAdmin')
 
   return (
     <nav style={{
@@ -34,7 +35,7 @@ function Navbar() {
               style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', fontSize: '15px' }}>
               👤 {username}
             </button>
-            <button onClick={() => navigate('/admin')}
+            <button onClick={() => navigate('/admin-login')}
               style={{ backgroundColor: '#e94560', border: 'none', color: 'white', cursor: 'pointer', fontSize: '13px', padding: '6px 14px', borderRadius: '5px' }}>
               Admin
             </button>
@@ -50,6 +51,12 @@ function Navbar() {
               Register
             </button>
           </>
+        )}
+        {isAdmin === 'true' && (
+          <button onClick={() => navigate('/admin')}
+            style={{ backgroundColor: 'green', border: 'none', color: 'white', cursor: 'pointer', fontSize: '13px', padding: '6px 14px', borderRadius: '5px' }}>
+            Dashboard
+          </button>
         )}
       </div>
     </nav>

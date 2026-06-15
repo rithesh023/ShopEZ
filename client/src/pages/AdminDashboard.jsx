@@ -13,6 +13,10 @@ function AdminDashboard() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (localStorage.getItem('isAdmin') !== 'true') {
+      navigate('/admin-login')
+      return
+    }
     fetchOrders()
     fetchProducts()
   }, [])
@@ -79,6 +83,12 @@ function AdminDashboard() {
     }
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin')
+    localStorage.removeItem('adminName')
+    navigate('/')
+  }
+
   const tabStyle = (tab) => ({
     padding: '10px 25px',
     backgroundColor: activeTab === tab ? '#1a1a2e' : '#e0e0e0',
@@ -92,8 +102,10 @@ function AdminDashboard() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h2 style={{ color: '#1a1a2e' }}>Admin Dashboard</h2>
-        <button onClick={() => navigate('/')} style={{ padding: '8px 20px', backgroundColor: '#e94560', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+        <h2 style={{ color: '#1a1a2e' }}>🔐 Admin Dashboard</h2>
+        <button
+          onClick={handleLogout}
+          style={{ padding: '8px 20px', backgroundColor: '#e94560', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Logout
         </button>
       </div>
@@ -119,7 +131,7 @@ function AdminDashboard() {
                 <p>Quantity: {order.quantity}</p>
                 <p>Address: {order.address}</p>
                 <p>Payment: {order.paymentMethod}</p>
-                <p>Status: <span style={{ color: 'orange', fontWeight: 'bold' }}>{order.status}</span></p>
+                <p>Status: <span style={{ color: order.status === 'Cancelled' ? '#e94560' : 'orange', fontWeight: 'bold' }}>{order.status}</span></p>
                 <p style={{ color: '#999', fontSize: '12px' }}>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
               </div>
             ))

@@ -8,6 +8,7 @@ import Cart from './pages/Cart'
 import Profile from './pages/Profile'
 import AdminDashboard from './pages/AdminDashboard'
 import Checkout from './pages/Checkout'
+import AdminLogin from './pages/AdminLogin'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
       </Routes>
     </BrowserRouter>
   )
